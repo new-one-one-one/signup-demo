@@ -1,0 +1,2 @@
+export const UPDATE_FIELD = 'UPDATE_FIELD';
+export const UPDATE_ERRORS = 'UPDATE_ERRORS';

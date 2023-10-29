@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export interface CardContainerProps {
+export interface ICardContainerProps {
   header: ReactNode;
   footer: ReactNode;
   body: ReactNode;
@@ -8,7 +8,7 @@ export interface CardContainerProps {
   shadow: boolean;
 }
 
-export interface LabelWithValueProps {
+export interface ILabelWithValueProps {
   errorMessage?: string;
   label: string;
   alignment: 'horizontal' | 'vertical';

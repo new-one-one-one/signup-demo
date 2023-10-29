@@ -1,8 +1,8 @@
 import React from 'react';
-import { CardContainerProps } from '../../interfaces/components';
+import { ICardContainerProps } from '../../interfaces/components';
 import "./styles.css";
 
-const CardContainer: React.FC<CardContainerProps> = ({
+const CardContainer: React.FC<ICardContainerProps> = ({
   header,
   footer,
   body,
