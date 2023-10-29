@@ -1,59 +1,79 @@
-# Task 
-1. *User Interface Design*:
-   - Create a clean and user-friendly sign-up form with fields for the username, email, password, and a confirmation password.
-   - Implement form validation with clear error messages for invalid inputs (e.g., invalid email format, password too short, passwords do not match).
+# React Project - User Signup and Profile
 
-2. *State Management*:
-   - Use React’s state management to handle form inputs and validation states.
-   - (Optional) If they are experienced, they could use a more advanced state management library like Redux or Context API.
+This React project is designed to provide a user signup experience with various features and reusable components. It also includes validation functions, responsive design, and user data storage with an expiration key. Below are the key aspects of this project:
 
-3. *Component Structure*:
-   - Break down the user interface into reusable React components (e.g., InputField, Button).
-   - Ensure proper use of functional components and hooks.
+## Project Setup
 
-4. *Styling*:
-   - Use CSS-in-JS libraries like styled-components or emotion, or CSS preprocessors like SCSS.
-   - Implement responsive design to ensure the sign-up page looks good on both desktop and mobile devices.
+1. Clone the project from the Git repository:
+   ```bash
+   git clone https://github.com/new-one-one-one/signup-demo.git
+   ```
 
-5. *Federation Integration*:
-   - Implement federated authentication using a popular provider like Google or Facebook.
-   - Use libraries like `react-oauth-google` or `react-facebook-login` for easier integration.
-   - Handle authentication flow and errors gracefully.
+2. Install project dependencies using npm:
+   ```bash
+   npm install
+   ```
 
-6. *API Integration*:
-   - Set up a mock API server or use a service like MirageJS to simulate backend interactions.
-   - Implement API calls to submit the sign-up form data and handle server responses.
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-7. *Security Practices*:
-   - Ensure secure handling of user data and passwords.
-   - Implement client-side validation, but also emphasize the importance of server-side validation.
+## Reusable Components
 
-8. *Testing*:
-   - Write unit tests for the components and utility functions using libraries like Jest and Testing Library.
-   - Implement end-to-end tests using Cypress or a similar testing framework.
+### LabelWithValue
 
-9. *Documentation*:
-   - Provide clear comments and documentation in the code to explain the logic and choices made during implementation.
-   - Include a README file with instructions on how to run and test the application.
+- A reusable component for rendering labels with associated values.
+- Supports horizontal and vertical alignments.
+- Allows for error messages, validation, and optional helper text.
+- Dynamic label colors based on validation status.
+- Provides clear separation of label, value, and additional information.
 
-10. *Bonus (for extra expertise)*:
-    - Implement a feature to show/hide the password.
-    - Add animations or transitions for a better user experience.
-    - Use TypeScript for static type checking.
-    - Implement accessibility features to ensure the sign-up page is accessible to as many users as possible.
-# Solution To Task
+### CardContainer
 
-## Getting Started with Create React App + TypeScript
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- A versatile card component for organizing content.
+- Features customizable header, body, and footer sections.
+- Adjustable width and shadow effects.
+- Designed for responsive layouts.
 
-### Available Scripts
+## Validation Functions
 
-In the project directory, you can run:
+1. **Email Validation**
 
-### `yarn start`
+   - Implements a robust email validation function.
+   - Checks if the provided email follows a valid email format using regular expressions.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. **Password Validation**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+   - Validates passwords based on specific criteria, including:
+     - Minimum length of 10 characters.
+     - At least 8 alphabetic characters.
+     - At least one lowercase and one uppercase letter.
+     - At least one special character.
+     - At least one numeric character.
+
+## React Router Redirection
+
+- Utilizes React Router for handling route navigation.
+- Implements dynamic redirection logic to ensure a smooth user experience.
+- Redirects users to the signup page or profile page based on certain conditions.
+
+## Responsive Design
+
+- The project incorporates responsive design principles.
+- Components are designed to adapt to different screen sizes and orientations.
+- Provides a consistent user experience on various devices.
+
+## User Data Storage
+
+- Stores user data in the browser's local storage.
+- Uses an expiration key to ensure that user data is automatically deleted after a specified time (e.g., 1 minute).
+- Data retrieval and expiration are handled effectively.
+
+## Contributors
+
+- [Piyush Ohri](https://github.com/new-one-one-one)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
