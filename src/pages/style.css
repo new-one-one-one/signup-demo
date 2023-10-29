@@ -36,3 +36,9 @@
   background-color: transparent;
   outline: none;
 }
+
+.bordered {
+  height: 22;
+  border-radius: 4;
+  border: 2px solid grey;
+}

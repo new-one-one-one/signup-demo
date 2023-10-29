@@ -1,24 +1,27 @@
 import React from 'react';
 import SignupForm from './pages/signup';
 import './App.css';
-import CardContainer from './components/Card/cardContainer';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Profile from './pages/profile';
+import { getUserData } from './helpers/utils';
 
 function App() {
+  const userData = useSelector((state: any) => state || getUserData() );
+
   return (
     <div className="App">
-      <CardContainer
-        header={
-          <h3>
-            Sign Up 
-          </h3>
-        }
-        body={
+      <BrowserRouter>
+      <Routes>
+        <Route path="/signup" element={
           <SignupForm/>
-        }
-        footer={null}
-        width='600px'
-        shadow
-      />
+        } />
+        <Route
+          path="/profile"
+          element={<Profile userData={userData}/>}
+        />
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }
