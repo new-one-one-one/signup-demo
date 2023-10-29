@@ -1,0 +1,38 @@
+.custom-button {
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  font-weight: 400;
+  color: white;
+}
+
+.purple-button {
+    background-color: rgb(109, 37, 161);
+}
+
+.blue-button {
+  background-color: rgb(66, 101, 172);
+}
+
+.grey-button {
+  background-color: rgb(131, 135, 116);
+}
+
+.custom-button:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.input-style {
+  width: 100%;
+  padding: 5px;
+  font-size: 14px;
+  border: none;
+  border-bottom: 2px solid grey;
+  transition: all 0.3s; 
+  background-color: transparent;
+  outline: none;
+}

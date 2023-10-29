@@ -9,6 +9,8 @@ import {
 } from '../helpers/validations';
 import { updateErrors, updateField } from '../reduxStore/actions/signUpActions';
 import LabelWithValue from '../components/LabelWithValue';
+import { storeUserDataWithExpiry } from '../helpers/utils';
+import "./style.css";
 
 const Signup: React.FC = () => {
   const dispatch = useDispatch();
@@ -33,9 +35,31 @@ const Signup: React.FC = () => {
   };
 
   const handleSubmit = () => {
-
+    handleValidation();
+    if (
+      !currentState?.errors.username &&
+      !currentState?.errors.email &&
+      !currentState?.errors.password &&
+      !currentState?.errors.confirmPassword
+    ) {
+      // Data is valid, store it in localStorage with a 1-minute expiry
+      storeUserDataWithExpiry(
+        currentState?.email,
+        currentState?.username,
+        currentState?.password
+      );
+  
+      // You can also clear the form fields here if needed
+      // For example, reset the state or clear the input fields
+      dispatch(updateField('username', ''));
+      dispatch(updateField('email', ''));
+      dispatch(updateField('password', ''));
+      dispatch(updateField('confirmPassword', ''));
+    } else {
+      console.log('Validation errors exist, data not stored.');
+    }
   };
-
+  
   return (
     <div>
       <LabelWithValue
@@ -44,6 +68,7 @@ const Signup: React.FC = () => {
         separator=":"
         valueComponent={
           <input
+            className='input-style'
             type="text"
             value={currentState && currentState?.username}
             onChange={(e) => handleInputChange('username', e.target.value)}
@@ -59,6 +84,7 @@ const Signup: React.FC = () => {
         separator=":"
         valueComponent={
           <input
+            className='input-style'
             type="text"
             value={currentState && currentState.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
@@ -74,6 +100,7 @@ const Signup: React.FC = () => {
         separator=":"
         valueComponent={
           <input
+            className='input-style'
             type="password"
             value={currentState && currentState.password}
             onChange={(e) => handleInputChange('password', e.target.value)}
@@ -89,6 +116,7 @@ const Signup: React.FC = () => {
         separator=":"
         valueComponent={
           <input
+            className='input-style'
             type="password"
             value={currentState && currentState.confirmPassword}
             onChange={(e) =>
@@ -100,9 +128,17 @@ const Signup: React.FC = () => {
         isRequired
       />
 
-      <button onClick={handleValidation}>Validate</button>
-      <button onClick={handleSubmit}>Submit</button>
-      <button>Clear</button>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+        <button className="custom-button purple-button" onClick={handleValidation}>
+          Validate
+        </button>
+        <button className="custom-button blue-button" onClick={handleSubmit}>
+          Submit
+        </button>
+        <button className="custom-button grey-button">
+          Clear
+        </button>
+      </div>
     </div>
   );
 };
