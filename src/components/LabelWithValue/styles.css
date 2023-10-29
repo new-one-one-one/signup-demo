@@ -1,0 +1,40 @@
+
+.label-text {
+    font-weight: bold;
+    color: rgb(38, 40, 42);
+}
+
+.custom-input-field.horizontal {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0; 
+}
+  
+.custom-input-field.vertical {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.error-label {
+    color: rgb(80, 4, 4);
+    font-weight: bold;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.helper-text {
+    font-size: 0.7rem;
+    font-style: italic;
+    color: #666;
+}
+
+.error-message {
+    color: rgb(171, 31, 31);
+    font-style: italic;
+    font-size: 0.7rem;
+}
