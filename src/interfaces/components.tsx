@@ -8,7 +8,6 @@ export interface CardContainerProps {
   shadow: boolean;
 }
 
-
 export interface LabelWithValueProps {
   errorMessage?: string;
   label: string;
