@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const storeUserDataWithExpiry = (email: string, username: string, password: string) => {
     try {
         const now = new Date().getTime();
@@ -34,7 +36,23 @@ const getUserData = () => {
 };
 
 
+const validateAccessToken = async (accessToken:string) => {
+  try {
+    const response = await axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${accessToken}`);
+    const tokenInfo = response.data;
+
+    if (tokenInfo.aud === process.env.REACT_APP_OAUTH_CLIENT_ID) {
+      console.log('Access token is valid');
+      return true 
+    }
+  } catch (error) {
+    console.error('Error validating access token:', error);
+  }
+  return false;
+};
+
 export  {
     storeUserDataWithExpiry,
-    getUserData
+    getUserData,
+    validateAccessToken
 }

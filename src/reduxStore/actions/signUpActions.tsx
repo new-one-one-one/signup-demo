@@ -1,4 +1,4 @@
-import { UPDATE_FIELD, UPDATE_ERRORS } from '../../helpers/constants';
+import { UPDATE_FIELD, UPDATE_ERRORS, SET_ACCESS_TOKEN, REMOVE_ACCESS_TOKEN } from '../../helpers/constants';
 
 export const updateField = (field: string, value: string) => {
   console.log({
@@ -18,3 +18,12 @@ export const updateErrors = (errors: { [key: string]: string | null }) => {
     errors,
   };
 };
+
+export const setAccessToken = (accessToken: string) => ({
+  type: SET_ACCESS_TOKEN,
+  accessToken,
+});
+
+export const clearAccessToken = () => ({
+  type: REMOVE_ACCESS_TOKEN,
+});

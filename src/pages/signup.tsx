@@ -7,12 +7,12 @@ import {
   validatePassword,
   validateConfirmPassword,
 } from '../helpers/validations';
-import { updateErrors, updateField } from '../reduxStore/actions/signUpActions';
+import { setAccessToken, updateErrors, updateField } from '../reduxStore/actions/signUpActions';
 import LabelWithValue from '../components/LabelWithValue';
 import { storeUserDataWithExpiry } from '../helpers/utils';
 import "./style.css";
 import CardContainer from '../components/Card/cardContainer';
-import {redirect, RedirectFunction, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {GoogleLogin} from "react-google-login";
 import { gapi } from 'gapi-script';
 
@@ -55,6 +55,7 @@ const Signup: React.FC = () => {
       profile?.name,
       "password"
     );
+    dispatch(setAccessToken(response.tokenId));
     navigate("/profile")
   }
 
@@ -83,6 +84,8 @@ const Signup: React.FC = () => {
       console.log('Validation errors exist, data not stored.');
     }
   };
+
+  console.log({currentState})
 
   useEffect(() => {
     function start() {

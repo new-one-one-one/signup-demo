@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import "./style.css";
 import CardContainer from '../components/Card/cardContainer';
-import { getUserData } from '../helpers/utils';
+import { getUserData, validateAccessToken } from '../helpers/utils';
 import {redirect, useNavigate} from "react-router-dom"
 import { GoogleLogout, GoogleLogoutProps } from 'react-google-login';
+import { useSelector } from 'react-redux';
 
 const Profile = ({userData={
     email: "", 
@@ -13,6 +14,10 @@ const Profile = ({userData={
 
   const [userDataStorage, setUserDataStorage] = useState<any>({
     expiry: 10000
+  });
+
+  const currentState = useSelector((state: any) => {
+    return state
   });
   const navigate = useNavigate();
 
@@ -30,6 +35,29 @@ const Profile = ({userData={
   };
 
   useEffect(() => {
+
+      const checkAccessTokenValidity = async () => {
+        if (currentState.accessToken) {
+          try {
+            // Validate the access token asynchronously
+            const isValidAccess = await validateAccessToken(currentState.accessToken);
+    
+            // if (isValidAccess) {
+            //   console.log("Access token is valid");
+            //   // Continue with any other profile-related logic
+            // } else {
+            //   console.log("Access token is not valid");
+            //   // Redirect the user to the login page or take appropriate action
+            //   navigate("/");
+            // }
+          } catch (error) {
+            console.error("Error while validating access token:", error);
+          }
+        }
+      };
+    
+      checkAccessTokenValidity();    
+    
     if(localStorage) {
       const current = getUserData();
       setUserDataStorage(current)
@@ -41,7 +69,7 @@ const Profile = ({userData={
      else {
       navigate("/")
      }
-  }, [])
+  }, [currentState.accessToken, navigate])
 
   return (
     <CardContainer
