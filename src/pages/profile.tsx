@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import "./style.css";
 import CardContainer from '../components/Card/cardContainer';
 import { getUserData } from '../helpers/utils';
-import {redirect} from "react-router-dom"
+import {redirect, useNavigate} from "react-router-dom"
+import { GoogleLogout, GoogleLogoutProps } from 'react-google-login';
 
 const Profile = ({userData={
     email: "", 
@@ -13,6 +14,8 @@ const Profile = ({userData={
   const [userDataStorage, setUserDataStorage] = useState<any>({
     expiry: 10000
   });
+  const navigate = useNavigate();
+
   const [password, setPassword] = useState('');
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
 
@@ -32,11 +35,11 @@ const Profile = ({userData={
       setUserDataStorage(current)
       console.log({current})
       if(!current || current.expiry < new Date().getTime())  {
-        redirect("/signup")
+        navigate("/")
       }
     }
      else {
-      redirect("/signup")
+      navigate("/")
      }
   }, [])
 
@@ -74,6 +77,10 @@ const Profile = ({userData={
               <button className="custom-button purple-button"onClick={checkPassword}>Reveal Password</button>
           </div>
           )}
+          <GoogleLogout 
+            clientId={process.env.REACT_APP_OAUTH_CLIENT_ID ?? ""}
+            onLogoutSuccess={() => console.log("Succes logout")}
+          />
         </div>
       }
       shadow

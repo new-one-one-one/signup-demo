@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ALIGNMENT_TYPE } from '../interfaces/components';
 import {
@@ -12,7 +12,10 @@ import LabelWithValue from '../components/LabelWithValue';
 import { storeUserDataWithExpiry } from '../helpers/utils';
 import "./style.css";
 import CardContainer from '../components/Card/cardContainer';
-import {redirect} from "react-router-dom"
+import {redirect, RedirectFunction, useNavigate} from "react-router-dom";
+import {GoogleLogin} from "react-google-login";
+import { gapi } from 'gapi-script';
+
 const Signup: React.FC = () => {
   const dispatch = useDispatch();
   const currentState = useSelector((state: any) => {
@@ -42,6 +45,23 @@ const Signup: React.FC = () => {
     dispatch(updateField('confirmPassword', ''));
   }
 
+  const navigate = useNavigate()
+
+  const onSuccess = (response: any) => {
+    console.log("On Scucess", response.profileObj)
+    const profile = response.profileObj;
+    storeUserDataWithExpiry(
+      profile?.email,
+      profile?.name,
+      "password"
+    );
+    navigate("/profile")
+  }
+
+  const onFailure = (response: any) => {
+    console.log("On Failure", response)
+  }
+
   const handleSubmit = () => {
     
     handleValidation();
@@ -58,11 +78,22 @@ const Signup: React.FC = () => {
         currentState?.password
       );
       clearForm();
-      redirect("/profile")
+      navigate("/profile")
     } else {
       console.log('Validation errors exist, data not stored.');
     }
   };
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: process.env.REACT_APP_OAUTH_CLIENT_ID,
+        scope: 'email',
+      });
+    }
+
+    gapi.load('client:auth2', start);
+  }, []);
   
   return (
     <CardContainer
@@ -147,6 +178,13 @@ const Signup: React.FC = () => {
             <button className="custom-button grey-button" onClick={clearForm}>
               Clear
             </button>
+            <GoogleLogin
+              clientId={process.env.REACT_APP_OAUTH_CLIENT_ID ?? ""}
+              buttonText="Sign Up With Google"
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              cookiePolicy={'single_host_origin'}
+            />
           </div>
         </div>
       }

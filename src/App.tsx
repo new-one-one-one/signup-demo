@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Routes>
-        <Route path="/signup" element={
+        <Route path="/" element={
           <SignupForm/>
         } />
         <Route
