@@ -107,7 +107,10 @@ const Profile = ({userData={
           )}
           <GoogleLogout 
             clientId={process.env.REACT_APP_OAUTH_CLIENT_ID ?? ""}
-            onLogoutSuccess={() => console.log("Succes logout")}
+            onLogoutSuccess={() => {
+              navigate("/")
+              console.log("Succes logout")
+            }}
           />
         </div>
       }

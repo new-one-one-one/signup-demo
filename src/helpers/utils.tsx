@@ -38,7 +38,7 @@ const getUserData = () => {
 
 const validateAccessToken = async (accessToken:string) => {
   try {
-    const response = await axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${accessToken}`);
+    const response = await axios.get(`https://oauth2.googleapis.com/tokeninfo?id_token=${accessToken}`);
     const tokenInfo = response.data;
 
     if (tokenInfo.aud === process.env.REACT_APP_OAUTH_CLIENT_ID) {
